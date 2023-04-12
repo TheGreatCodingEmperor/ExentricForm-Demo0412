@@ -1,0 +1,94 @@
+<div class="form-container">
+  <table id="form-table" class="fluid">
+    <colgroup>
+      <col>
+      <col>
+      <col>
+      <col>
+    </colgroup>
+    <tr>
+      <th>
+        名稱
+      </th>
+      <td app-form-editable [(selectedField)]="selectedField" fieldName="name">
+        <div class="display">
+          {{datas.name}}
+        </div>
+        <div class="editable">
+          <input class="w-full" pInputText [(ngModel)]="datas.name" type="text" (blur)="unselect()">
+        </div>
+      </td>
+
+      <th>
+        Email
+      </th>
+      <td app-form-editable [(selectedField)]="selectedField" fieldName="email">
+        <div class="display">
+          {{datas.email}}
+        </div>
+        <div class="editable">
+          <input class="w-full" pInputText [(ngModel)]="datas.email" type="text" (blur)="unselect()">
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <th>
+        住址
+      </th>
+      <td colspan="3" app-form-editable [(selectedField)]="selectedField" fieldName="address">
+        <div class="display">
+          {{datas.address}}
+        </div>
+        <div class="editable">
+          <input class="w-full" pInputText [(ngModel)]="datas.address" type="text" (blur)="unselect()">
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <th>
+        生日
+      </th>
+      <td app-form-editable [(selectedField)]="selectedField" fieldName="birthday">
+        <div class="display">
+          {{datas.birthday}}
+        </div>
+        <div class="editable">
+          <input class="w-full" pInputText [(ngModel)]="datas.birthday" type="date" (blur)="unselect()">
+        </div>
+      </td>
+
+      <th>
+        性別
+      </th>
+      <td app-form-editable [(selectedField)]="selectedField" fieldName="gender">
+        <div class="display">
+          {{datas.gender|formLookup:genderOptions:'label':'value'}}
+        </div>
+        <div class="editable">
+          <ng-container *ngFor="let item of genderOptions">
+            <p-radioButton name="gender" [value]="item.value" [(ngModel)]="datas.gender"></p-radioButton>
+            <label class="ml-2">{{item.label}}</label>
+          </ng-container>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        部門
+      </th>
+      <td app-form-editable [(selectedField)]="selectedField" fieldName="department">
+        <div class="display">
+          {{datas.department|formLookup:departments:'label':'value'}}
+        </div>
+        <div class="editable">
+          <p-dropdown styleClass="w-full" [options]="departments" [(ngModel)]="datas.department" optionLabel="label"
+            optionValue="value"></p-dropdown>
+        </div>
+      </td>
+    </tr>
+  </table>
+  {{selectedField}}
+  {{datas|json}}
+</div>
